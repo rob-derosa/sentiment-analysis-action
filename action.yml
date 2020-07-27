@@ -1,0 +1,31 @@
+name: 'Sentiment Analysis Action'
+author: Rob DeRosa
+description: 'Analyzes text for sentiment and give a confidence score for positive, neutral and negative'
+branding:
+  icon: bar-chart-2
+  color: green
+inputs:
+  azureCognitiveSubscriptionKey:
+    required: true
+    description: 'Azure Cognitive Services resource key found in in the Azure Portal'
+  azureCognitiveEndpoint:
+    required: true
+    description: 'Azure Cognitive Services endpoint found in in the Azure Portal'
+  textToAnalyze:
+    required: true
+    description: 'The text to analyze for sentiment'
+  textLanguage:
+    required: true
+    description: 'The language of the text to analyze for sentiment'
+outputs:
+  positive:
+    description: 'Overall confidence score of positivity in the text'
+  neutral:
+    description: 'Overall confidence score of neutrality in the text'
+  negative:
+    description: 'Overall confidence score of negativity in the text'
+  results:
+    description: 'JSON payload of with per-sentence analysis'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
