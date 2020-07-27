@@ -1,0 +1,31 @@
+name: 'pii-detection'
+on:
+  issues:
+    types:
+      - opened
+      - edited
+  issue_comment:
+    types:
+      - created
+      - edited
+  pull_request:
+    types:
+      - opened
+      - edited
+  pull_request_review_comment:
+    types:
+      - created
+      - edited
+jobs:
+  detect-pii:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        name: "Run PII detector"
+        with:
+          azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
+          azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
+          categories: "email|ip|phone number"
+          labelText: "PII DETECTED!!"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

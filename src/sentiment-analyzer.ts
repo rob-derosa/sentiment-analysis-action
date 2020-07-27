@@ -37,7 +37,6 @@ export interface RequestDocument {
 }
 
 
-
 export async function callSentimentAnalysisEndpoint(textToCheck: string, textLanguage: string, azureCognitiveEndpoint: string, azureCognitiveSubscriptionKey: string): Promise<ResponseDocumentRoot> {
   try {
 
