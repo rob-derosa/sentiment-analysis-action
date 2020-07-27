@@ -22,9 +22,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
+        id: step1
         name: "Run Sentiment Analysis"
         with:
           azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
           azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
           textToAnalyze: ${{ github.event.comment.body }}
           textLanguage: "en"
+      - name: Dump output
+        run: echo ${{ steps.step1.outputs }}
+  
