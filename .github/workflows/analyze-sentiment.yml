@@ -42,7 +42,7 @@ jobs:
         with:
           azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
           azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
-          textToAnalyze: ${{env.TEXT_TO_ANALYZE}}
+          textToAnalyze: ${{ env.TEXT_TO_ANALYZE }}
           textLanguage: "en"
       - name: Dump output
         env:
