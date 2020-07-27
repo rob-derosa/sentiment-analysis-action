@@ -23,16 +23,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: set text input comment
-        if: ${{ github.event.comment.body }}
-        run: |
-          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}
-      
       - name: set text input issue
         if: ${{ github.event.issue.body }}
         run: |
           echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.issue.body }}
 
+      - name: set text input comment
+        if: ${{ github.event.comment.body }}
+        run: |
+          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}
+      
       - uses: ./
         id: analyzeSentiment
         name: "Run Sentiment Analysis"
