@@ -534,12 +534,14 @@ function run() {
             if (!textToAnalyze)
                 throw new Error('No text passed in to analyze');
             const response = yield pii.callSentimentAnalysisEndpoint(textToAnalyze, textLanguage, url, subKey);
-            if (response) {
+            if (response && response.documents.length >= 1) {
                 console.log("\n\n------------------------------------------------------");
                 console.log(JSON.stringify(response));
                 console.log("------------------------------------------------------\n\n");
+                core.setOutput("positive", response.documents[0].documentScores.positive);
+                core.setOutput("neutral", response.documents[0].documentScores.neutral);
+                core.setOutput("negative", response.documents[0].documentScores.negative);
                 core.setOutput("results", JSON.stringify(response));
-                console.log("------------------------------------------------------\n\n");
             }
             else {
                 console.log("There was no response from the Sentiment Analysis endpoint");
