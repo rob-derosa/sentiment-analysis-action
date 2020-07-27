@@ -16,6 +16,7 @@ on:
     types:
       - created
       - edited
+
 jobs:
   analyze-sentiment:
     runs-on: ubuntu-latest
@@ -24,17 +25,13 @@ jobs:
       
       - name: set text input comment
         if: ${{ github.event.comment.body }}
-        env:
-          TEXT_TO_ANALYZE: ${{ github.event.comment.body }}
         run: |
-          echo "$TEXT_TO_ANALYZE"
-
+          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}
+      
       - name: set text input issue
         if: ${{ github.event.issue.body }}
-        env:
-          TEXT_TO_ANALYZE: ${{ github.event.issue.body }}
         run: |
-          echo "$TEXT_TO_ANALYZE"
+          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.issue.body }}
 
       - uses: ./
         id: analyzeSentiment
