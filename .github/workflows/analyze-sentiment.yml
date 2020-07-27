@@ -26,5 +26,5 @@ jobs:
         with:
           azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
           azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
-          textToCheck: ${{ github.event.comment.body }}
+          textToAnalyze: ${{ github.event.comment.body }}
           textLanguage: "en"

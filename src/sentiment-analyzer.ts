@@ -37,7 +37,7 @@ export interface RequestDocument {
 }
 
 
-export async function callSentimentAnalysisEndpoint(textToCheck: string, textLanguage: string, azureCognitiveEndpoint: string, azureCognitiveSubscriptionKey: string): Promise<ResponseDocumentRoot> {
+export async function callSentimentAnalysisEndpoint(textToAnalyze: string, textLanguage: string, azureCognitiveEndpoint: string, azureCognitiveSubscriptionKey: string): Promise<ResponseDocumentRoot> {
   try {
 
     let url = `${azureCognitiveEndpoint}/text/analytics/v3.0-preview.1/sentiment`
@@ -49,7 +49,7 @@ export async function callSentimentAnalysisEndpoint(textToCheck: string, textLan
     requestRoot.documents.push({
       id: "1",
       language: textLanguage,
-      text: textToCheck
+      text: textToAnalyze
     });
 
     return fetch(url, {

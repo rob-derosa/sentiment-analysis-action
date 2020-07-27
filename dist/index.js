@@ -3480,7 +3480,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.callSentimentAnalysisEndpoint = void 0;
 const node_fetch_1 = __importDefault(__webpack_require__(454));
-function callSentimentAnalysisEndpoint(textToCheck, textLanguage, azureCognitiveEndpoint, azureCognitiveSubscriptionKey) {
+function callSentimentAnalysisEndpoint(textToAnalyze, textLanguage, azureCognitiveEndpoint, azureCognitiveSubscriptionKey) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let url = `${azureCognitiveEndpoint}/text/analytics/v3.0-preview.1/sentiment`;
@@ -3490,7 +3490,7 @@ function callSentimentAnalysisEndpoint(textToCheck, textLanguage, azureCognitive
             requestRoot.documents.push({
                 id: "1",
                 language: textLanguage,
-                text: textToCheck
+                text: textToAnalyze
             });
             return node_fetch_1.default(url, {
                 method: "POST",
