@@ -18,7 +18,7 @@ on:
       - edited
 
 jobs:
-  one:
+  debug-context:
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -46,6 +46,4 @@ jobs:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
       - name: JSON Test
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo ${{ github.event.comment.body }}

@@ -1,4 +1,4 @@
-name: 'pii-detection'
+name: 'analyze-sentiment'
 on:
   issues:
     types:
@@ -22,10 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
-        name: "Run PII detector"
+        name: "Run Sentiment Analysis"
         with:
           azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
           azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
-          categories: "email|ip|phone number"
-          labelText: "PII DETECTED!!"
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          textToCheck: ${{ github.event.comment.body }}
+          textLanguage: "en"
