@@ -26,11 +26,15 @@ jobs:
         if: ${{ github.event.comment.body }}
         env:
           TEXT_TO_ANALYZE: ${{ github.event.comment.body }}
+        run: |
+          echo "$TEXT_TO_ANALYZE"
 
       - name: set text input issue
         if: ${{ github.event.issue.body }}
         env:
           TEXT_TO_ANALYZE: ${{ github.event.issue.body }}
+        run: |
+          echo "$TEXT_TO_ANALYZE"
 
       - uses: ./
         id: analyzeSentiment
