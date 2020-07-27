@@ -21,20 +21,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: set text input comment
+        if: ${{ github.event.comment.body }}
+        env:
+          TEXT_TO_ANALYZE: ${{ github.event.comment.body }}
+
+      - name: set text input issue
+        if: ${{ github.event.issue.body }}
+        env:
+          TEXT_TO_ANALYZE: ${{ github.event.issue.body }}
+
       - uses: ./
-        id: step1
+        id: analyzeSentiment
         name: "Run Sentiment Analysis"
         with:
           azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
           azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
-          textToAnalyze: ${{ github.event.comment.body }}
+          textToAnalyze: "$TEXT_TO_ANALYZE"
           textLanguage: "en"
       - name: Dump output
         env:
-          OUTPUTS: ${{ toJson(steps.step1.outputs) }}
+          OUTPUTS: ${{ toJson(steps.analyzeSentiment.outputs) }}
         run: echo "$OUTPUTS"
       - name: label issue
-        if: ${{ steps.step1.outputs.negative >= .6 }}
+        if: ${{ steps.analyzeSentiment.outputs.negative >= .6 }}
         uses: andymckay/labeler@master
         with:
-          add-labels: "NEGATIVE, Critical"
+          add-labels: "negativity detected"
