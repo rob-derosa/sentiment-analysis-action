@@ -1,6 +1,6 @@
 name: 'Sentiment Analysis Action'
-author: Rob DeRosa
 description: 'Analyzes text for sentiment and give a confidence score for positive, neutral and negative'
+author: rob-derosa@github.com
 branding:
   icon: bar-chart-2
   color: green
