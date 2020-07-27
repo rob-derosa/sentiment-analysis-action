@@ -522,10 +522,10 @@ const github = __importStar(__webpack_require__(469));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const subKey = core.getInput("azureCognitiveSubscriptionKey", { required: true });
-            const url = core.getInput("azureCognitiveEndpoint", { required: true });
-            const textToAnalyze = core.getInput("textToAnalyze", { required: true });
-            const textLanguage = core.getInput("textLanguage", { required: true });
+            const subKey = core.getInput("azure-cognitive-subscription-key", { required: true });
+            const url = core.getInput("azure-cognitive-endpoint", { required: true });
+            const textToAnalyze = core.getInput("text-to-analyze", { required: true });
+            const textLanguage = core.getInput("text-language", { required: true });
             console.log(github.context.payload);
             if (!subKey)
                 throw new Error('No Azure Cognitive Service subscription key defined');
