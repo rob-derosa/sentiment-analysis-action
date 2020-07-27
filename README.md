@@ -1,4 +1,4 @@
-# PII Detection Action 
+# Sentiment Analysis Action 
 
 This is a GitHub action to detect PII (Personally Identifiable Information) such as phone numbers, social security numbers, email addresses, IP addresses, etc. in any issues or pull requests that are opened, edited or commented on. If PII is detected using the [Entity Recognition Cognitive Service](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/named-entity-types?tabs=personal) from Microsoft under the `personal` domain, a custom label is added to the issue or pull request.
 
