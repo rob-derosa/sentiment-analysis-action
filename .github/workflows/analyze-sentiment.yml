@@ -34,7 +34,7 @@ jobs:
           OUTPUTS: ${{ toJson(steps.step1.outputs) }}
         run: echo "$OUTPUTS"
       - name: label issue
-        if: ${{ toJson(steps.step1.outputs.negative >= .6 }}
+        if: ${{ steps.step1.outputs.negative >= .6 }}
         uses: andymckay/labeler@master
         with:
           add-labels: "NEGATIVE, Critical"
