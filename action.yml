@@ -25,7 +25,7 @@ outputs:
   negative:
     description: 'Overall confidence score of negativity in the text'
   results:
-    description: 'JSON payload of with per-sentence analysis'
+    description: 'JSON payload of with deeper, per-sentence analysis'
 runs:
   using: 'node12'
   main: 'dist/index.js'
