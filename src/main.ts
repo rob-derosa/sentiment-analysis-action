@@ -30,6 +30,9 @@ async function run(): Promise<void> {
       core.setOutput("results", JSON.stringify(response));
       console.log("------------------------------------------------------\n\n");
     }
+    else{
+      console.log("There was no response from the Sentiment Analysis endpoint");
+    }
 
     core.setOutput("results", JSON.stringify(response));
   } catch (error) {
