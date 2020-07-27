@@ -30,5 +30,7 @@ jobs:
           textToAnalyze: ${{ github.event.comment.body }}
           textLanguage: "en"
       - name: Dump output
-        run: echo ${{ toJson(steps.step1.outputs) }}
+        env:
+          OUTPUTS: ${{ toJson(steps.step1.outputs) }}
+        run: echo "$OUTPUTS"
   
