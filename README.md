@@ -1,5 +1,7 @@
 # Sentiment Analysis Action 
 
+
+
 This is a GitHub action to analyze sentiment in any issues or pull requests that are opened, edited or commented on. If negative sentiment is detected using the [Sentiment Analysis Cognitive Service](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis?tabs=version-3) from Microsoft with a confidence score of >= 60%, a custom label `negativity detected` is added to the issue or pull request.
 
 A `results` output value is available containing the JSON response payload providing a detailed analysis of the results.
