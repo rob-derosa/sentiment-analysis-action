@@ -4,6 +4,8 @@ This is a GitHub action to analyze sentiment in any issues or pull requests that
 
 A `results` output value is available containing the JSON response payload providing a detailed analysis of the results.
 
+For this sample, I tried to keep the typescript logic limited to just analyzing sentiment on input text. The rest of the logic is in the `analyze-sentiment.yml` workflow file. This allows for greater variation on how and when to react to sentiment. 
+
 ## Usage
 
 Create a `.github/workflows/analyze-sentiment.yml` file:
@@ -34,24 +36,33 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: set text input to issue
+      - name: set text input pull request
+        if: ${{ github.event.pull_request.body }}
+        run: |
+          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.pull_request.body }}
+
+      - name: set text input issue
         if: ${{ github.event.issue.body }}
         run: |
           echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.issue.body }}
 
-      - name: set text input to comment
+      - name: set text input comment
         if: ${{ github.event.comment.body }}
         run: |
           echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}
       
       - uses: ./
         id: analyzeSentiment
-        name: "run sentiment analysis"
+        name: "Run Sentiment Analysis"
         with:
-          azureCognitiveSubscriptionKey: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
-          azureCognitiveEndpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
-          textToAnalyze: ${{ env.TEXT_TO_ANALYZE }}
-          textLanguage: "en"
+          azure-cognitive-subscription-key: ${{ secrets.AZURE_COGNITIVE_SUBSCRIPTION_KEY }}
+          azure-cognitive-endpoint: ${{ secrets.AZURE_COGNITIVE_ENDPOINT }}
+          text-to-analyze: ${{ env.TEXT_TO_ANALYZE }}
+          text-language: "en"
+      - name: Dump output
+        env:
+          OUTPUTS: ${{ toJson(steps.analyzeSentiment.outputs) }}
+        run: echo "$OUTPUTS"
       - name: label issue
         if: ${{ steps.analyzeSentiment.outputs.negative >= .6 }}
         uses: andymckay/labeler@master
@@ -70,11 +81,11 @@ The following inputs are required:
 
 ## In Action
 
-<!-- **A bug filed by a user was commented on by a contributor, triggering an PII analysis of the body of the comment**
-![PII Detection Step Output](https://github.com/rob-derosa/PiiDetectionAction/blob/main/assets/pii_detection_action_output.png?raw=true)
+**A PR filed by a user that contained negative sentiment**
+![Sentiment Analysis Step Output](https://github.com/rob-derosa/SentimentAnalysisAction/blob/main/assets/sentiment_analysis_action_output.png?raw=true)
 
-**PII was detected, some of which was discarded due category configuration**
-![Issue containing PII flagged with label](https://github.com/rob-derosa/PiiDetectionAction/blob/main/assets/pii_detection_issue_labeled.png?raw=true) -->
+**The confidence score for this PR was over 60% so the PR was labeled accordingly**
+![PR containing negative sentiment flagged with label](https://github.com/rob-derosa/SentimentAnalysisAction/blob/main/assets/sentiment_analysis_pr_labeled.png?raw=true)
 
 
 ## Limitations
