@@ -24,6 +24,7 @@ async function run(): Promise<void> {
 
     if (response && response.documents.length >= 1) {
       console.log("\n\n------------------------------------------------------");
+      console.log(textToAnalyze);
       console.log(JSON.stringify(response));
       console.log("------------------------------------------------------\n\n");
 

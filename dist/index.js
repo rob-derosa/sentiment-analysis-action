@@ -536,6 +536,7 @@ function run() {
             const response = yield pii.callSentimentAnalysisEndpoint(textToAnalyze, textLanguage, url, subKey);
             if (response && response.documents.length >= 1) {
                 console.log("\n\n------------------------------------------------------");
+                console.log(textToAnalyze);
                 console.log(JSON.stringify(response));
                 console.log("------------------------------------------------------\n\n");
                 core.setOutput("positive", response.documents[0].documentScores.positive);
