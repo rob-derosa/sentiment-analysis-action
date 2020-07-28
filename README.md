@@ -1,10 +1,10 @@
 # Sentiment Analysis Action 
 
-This is a GitHub action to analyze sentiment in any issues or pull requests that are opened, edited or commented on. If negative sentiment is detected using the [Sentiment Analysis Cognitive Service](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis?tabs=version-3) from Microsoft with a confidence score of >= 60%, a custom label `negativity detected` is added to the issue or pull request.
+This is a sample GitHub action to analyze sentiment in any issues or pull requests that are opened, edited or commented on. If negative sentiment is detected using the [Sentiment Analysis Cognitive Service](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis?tabs=version-3) from Microsoft with a confidence score of >= 90%, a custom label `negativity detected` is added to the issue or pull request.
 
 A `results` output value is available containing the JSON response payload providing a detailed analysis of the results.
 
-For this sample, I tried to keep the typescript logic limited to just analyzing sentiment on input text. The rest of the logic is in the `analyze-sentiment.yml` workflow file. This allows for greater variation on how and when to react to sentiment. 
+For this sample, I tried to keep the typescript logic limited to just analyzing sentiment on input text. The rest of the logic is in the `analyze-sentiment.yml` workflow file. This allows for greater variation on how and when to react to sentiment.
 
 ## Usage
 
@@ -64,7 +64,7 @@ jobs:
           OUTPUTS: ${{ toJson(steps.analyzeSentiment.outputs) }}
         run: echo "$OUTPUTS"
       - name: label issue
-        if: ${{ steps.analyzeSentiment.outputs.negative >= .6 }}
+        if: ${{ steps.analyzeSentiment.outputs.negative >= .9 }}
         uses: andymckay/labeler@master
         with:
           add-labels: "negativity detected"

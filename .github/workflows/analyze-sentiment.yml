@@ -51,7 +51,7 @@ jobs:
           OUTPUTS: ${{ toJson(steps.analyzeSentiment.outputs) }}
         run: echo "$OUTPUTS"
       - name: label issue
-        if: ${{ steps.analyzeSentiment.outputs.negative >= .6 }}
+        if: ${{ steps.analyzeSentiment.outputs.negative >= .9 }}
         uses: andymckay/labeler@master
         with:
           add-labels: "negativity detected"

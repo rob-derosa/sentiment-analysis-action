@@ -5,16 +5,16 @@ branding:
   icon: bar-chart-2
   color: green
 inputs:
-  azureCognitiveSubscriptionKey:
+  azure-cognitive-subscription-key:
     required: true
     description: 'Azure Cognitive Services resource key found in in the Azure Portal'
-  azureCognitiveEndpoint:
+  azure-cognitive-endpoint:
     required: true
     description: 'Azure Cognitive Services endpoint found in in the Azure Portal'
-  textToAnalyze:
+  text-to-analyze:
     required: true
     description: 'The text to analyze for sentiment'
-  textLanguage:
+  text-language:
     required: true
     description: 'The language of the text to analyze for sentiment'
 outputs:
