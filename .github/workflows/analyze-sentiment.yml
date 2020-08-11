@@ -26,17 +26,17 @@ jobs:
       - name: set text input pull request
         if: ${{ github.event.pull_request.body }}
         run: |
-          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.pull_request.body }}
+          echo "::set-env name=TEXT_TO_ANALYZE::${{ github.event.pull_request.body }}"
 
       - name: set text input issue
         if: ${{ github.event.issue.body }}
         run: |
-          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.issue.body }}
+          echo "::set-env name=TEXT_TO_ANALYZE::${{ github.event.issue.body }}"
 
       - name: set text input comment
         if: ${{ github.event.comment.body }}
         run: |
-          echo ::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}
+          echo "::set-env name=TEXT_TO_ANALYZE::${{ github.event.comment.body }}"
       
       - uses: ./
         id: analyzeSentiment
